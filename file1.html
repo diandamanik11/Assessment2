@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataTables dengan AJAX</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+</head>
+<body>
+    <table id="holiday-table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Tipe</th>
+                <th>Lokasi</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#holiday-table').DataTable({
+                "ajax": {
+                    "url": "https://brasilapi.com.br/api/feriados/v1/2024",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "name" },
+                    { "data": "date" },
+                    { "data": "description" },
+                    { "data": "type" },
+                    { "data": "location" }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

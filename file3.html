@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DataTables dengan AJAX</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+</head>
+<body>
+    <table id="holiday-table" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Tipe</th>
+                <th>Lokasi</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#holiday-table').DataTable({
+                "ajax": {
+                    "url": "https://brasilapi.com.br/api/feriados/v1/2024",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "name" },
+                    { "data": "date" },
+                    { "data": "description" },
+                    { "data": "type" },
+                    { "data": "location" }
+                ]
+            });
+
+            // Form Validation
+            $("#api-form").submit(function(event) {
+                event.preventDefault();
+
+                var name = $("#name").val();
+                var date = $("#date").val();
+                var description = $("#description").val();
+                var type = $("#type").val();
+                var location = $("#location").val();
+
+                if (name === "" || date === "" || description === "" || type === "" || location === "") {
+                    alert("Harap lengkapi semua field");
+                } else {
+                    // Lakukan tindakan dengan nilai-nilai form yang valid, misalnya kirim ke server
+                    alert("Form submitted:\n\n" +
+                          "Nama: " + name + "\n" +
+                          "Tanggal: " + date + "\n" +
+                          "Keterangan: " + description + "\n" +
+                          "Tipe: " + type + "\n" +
+                          "Lokasi: " + location);
+                }
+            });
+        });
+    </script>
+
+    <form id="api-form">
+        <label for="name">Nama:</label>
+        <input type="text" id="name" name="name">
+        <br><br>
+        <label for="date">Tanggal:</label>
+        <input type="text" id="date" name="date">
+        <br><br>
+        <label for="description">Keterangan:</label>
+        <input type="text" id="description" name="description">
+        <br><br>
+        <label for="type">Tipe:</label>
+        <input type="text" id="type" name="type">
+        <br><br>
+        <label for="location">Lokasi:</label>
+        <input type="text" id="location" name="location">
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
